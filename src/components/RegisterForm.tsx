@@ -5,7 +5,7 @@ export default function RegisterForm() {
     <>
       <form
         action={register}
-        className="flex flex-col gap-2 justify-start w-80 p-4"
+        className="flex flex-col gap-2 justify-start w-80 my-4"
       >
         <input type="text" name="name" placeholder="Enter Your Name" />
         <input type="email" name="email" placeholder="Enter Your Email" />

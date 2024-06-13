@@ -39,3 +39,5 @@ You can access to "admin" account by below.
 
 - create-next-app
 - mongoose
+- react-icons
+- google font (by 'next/font')

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { getSession } from "@/libs/getSession";
+import { logout } from "@/libs/action";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,8 +40,10 @@ export default async function RootLayout({
                 <li>
                   <Link href="/dashboard">Dashboard</Link>
                 </li>
-                <li>
-                  <span>Log out</span>
+                <li className="ml-auto">
+                  <form action={logout}>
+                    <button className="px-4">Log out</button>
+                  </form>
                 </li>
               </>
             )}

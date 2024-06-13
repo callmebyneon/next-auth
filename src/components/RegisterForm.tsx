@@ -1,4 +1,5 @@
 import { register } from "@/libs/action";
+import Link from "next/link";
 
 export default function RegisterForm() {
   return (
@@ -16,6 +17,12 @@ export default function RegisterForm() {
         />
         <button className="inline-block">Done</button>
       </form>
+      <Link
+        href="/login"
+        className="no-underline mt-4 p-2 rounded-md bg-blue-500 text-white"
+      >
+        <div className=" block text-center">Go To Log In</div>
+      </Link>
     </>
   );
 }

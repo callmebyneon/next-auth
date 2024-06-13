@@ -1,5 +1,6 @@
 import NextAuth, { CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
 import connectDB from "./libs/db";
 import { User } from "./libs/schema";
 import { compare } from "bcryptjs";
@@ -43,5 +44,55 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         // return null;
       },
     }),
+    GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
   ],
+  callbacks: {
+    async signIn({ user, account }: { user: any; account: any }) {
+      console.log("signIn", user, account);
+      if (account?.provider === "github") {
+        const { id, name, email } = user;
+
+        connectDB();
+        const existingUser = await User.findOne({ authProviderId: id });
+
+        if (!existingUser) {
+          // 없는 사용자는 가입 처리
+          await new User({
+            name,
+            email,
+            authProviderId: id,
+            role: "user",
+          }).save();
+        }
+
+        const socialUser = await User.findOne({ authProviderId: id });
+        console.log(socialUser);
+
+        user.role = socialUser?.role || "user";
+        user.id = socialUser?._id || null;
+
+        return true;
+      } else {
+        return true;
+      }
+    },
+    async jwt({ token, user }: { token: any; user: any }) {
+      console.log("jwt", token, user);
+      if (user) {
+        token.role = user.role; // JWT 토큰에 사용자 권한 추가
+        token.id = user.id; // JWT 토큰에 사용자 ID 추가
+      }
+      return token;
+    },
+    async session({ session, token }: { session: any; token: any }) {
+      if (token?.role) {
+        session.user.role = token.role;
+        session.user.id = token.id;
+      }
+      return session;
+    },
+  },
 });

@@ -38,6 +38,8 @@ You can access to "admin" account by below.
 ### made by
 
 - create-next-app
-- mongoose
+- next-auth
 - react-icons
+- tailwindcss
 - google font (by 'next/font')
+- mongoose

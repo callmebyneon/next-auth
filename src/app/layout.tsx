@@ -4,6 +4,7 @@ import "./globals.css";
 import Link from "next/link";
 import { getSession } from "@/libs/getSession";
 import { logout } from "@/libs/action";
+import GithubLink from "@/components/GithubLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,6 +50,7 @@ export default async function RootLayout({
             )}
           </ul>
         </nav>
+        <GithubLink />
         {children}
       </body>
     </html>

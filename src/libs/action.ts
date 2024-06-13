@@ -4,7 +4,14 @@ import { redirect } from "next/navigation";
 import connectDB from "./db";
 import { User } from "./schema";
 import { hash } from "bcryptjs";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
+
+// 로그아웃
+export async function logout() {
+  await signOut({
+    redirectTo: "/login",
+  });
+}
 
 // Github 로그인
 export async function githubLogin() {

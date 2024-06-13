@@ -6,6 +6,11 @@ import { User } from "./schema";
 import { hash } from "bcryptjs";
 import { signIn } from "@/auth";
 
+// Github 로그인
+export async function githubLogin() {
+  await signIn("github", { callbackUrl: "/" });
+}
+
 //로그인
 export async function login(formData: FormData) {
   const email = formData.get("email");
@@ -29,6 +34,8 @@ export async function login(formData: FormData) {
   } catch (error) {
     console.log(error);
   }
+
+  redirect("/");
 }
 
 // 회원가입

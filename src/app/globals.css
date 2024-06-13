@@ -33,3 +33,7 @@ input:not([type="radio"]):not([type="checkbox"]):not([type="range"]) {
 button {
   @apply p-2 rounded-md bg-zinc-200 hover:bg-zinc-300 border border-zinc-300;
 }
+
+a {
+  @apply underline;
+}

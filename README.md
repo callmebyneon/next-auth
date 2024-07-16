@@ -15,7 +15,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ### Deploy on Vercel
 
-📎 https://next-auth-ik43w3lcd-yi-nayeons-projects.vercel.app/
+📎 vercel.com
 
 ### admin
 
